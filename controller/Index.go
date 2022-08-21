@@ -3,18 +3,11 @@ package controller
 //controller/Index.go
 
 import (
+	"myGin/context"
 	"myGin/response"
-
-	"github.com/gin-gonic/gin"
 )
 
-func Index(context *gin.Context) *response.Response {
+func Index(context *context.Context) *response.Response {
 
-	if 1+1 == 2 {
-
-		return response.Resp().Json(gin.H{"msg": "hello world"})
-
-	}
-
-	return response.Resp().Json(gin.H{"msg": "hello world"})
+	return response.Resp().String(context.Domain())
 }
