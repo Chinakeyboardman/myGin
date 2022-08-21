@@ -1,6 +1,7 @@
 package main
 
 import (
+	"myGin/kernel"
 	"myGin/routes"
 
 	"github.com/gin-gonic/gin"
@@ -8,6 +9,9 @@ import (
 
 func main() {
 	r := gin.Default()
+
+	//加载全局变量
+	kernel.Load()
 
 	routes.Load(r)
 
