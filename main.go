@@ -15,5 +15,5 @@ func main() {
 
 	routes.Load(r)
 
-	r.Run()
+	r.Run(":8080")
 }

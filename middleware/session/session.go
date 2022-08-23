@@ -3,10 +3,11 @@ package session
 import (
 	context2 "context"
 	"encoding/json"
-	uuid "github.com/satori/go.uuid"
 	"myGin/context"
 	"myGin/redis"
 	"time"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 var cookieName = "my_gin"

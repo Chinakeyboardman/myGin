@@ -3,32 +3,50 @@ package controller
 //controller/Index.go
 
 import (
-	"myGin/component/limiter"
+	"myGin/component/lock"
 	"myGin/context"
 	"myGin/response"
 	"strconv"
 	"time"
-
-	"golang.org/x/time/rate"
 )
 
 func Index(context *context.Context) *response.Response {
 
-	l := limiter.NewLimiter(rate.Every(1*time.Second), 1, context.ClientIP())
+	l := lock.NewLock("test", 10*time.Second)
 
-	if !l.Allow() {
+	defer l.Release()
 
-		return response.Resp().String("您的访问过于频繁")
+	if l.Get() {
+
+		return response.Resp().String("拿锁成功")
 	}
 
-	return response.Resp().String("success")
+	return response.Resp().String("拿锁失败")
+}
+
+func Block(context *context.Context) *response.Response {
+
+	l := lock.NewLock("test", 10*time.Second)
+
+	defer l.Release()
+
+	if l.Block(5 * time.Second) {
+
+		return response.Resp().String("拿锁成功")
+
+	}
+
+	return response.Resp().String("拿锁失败")
+
 }
 
 func Index2(context *context.Context) *response.Response {
 
-	msg, _ := context.Session().Get("msg")
+	//msg, _ := context.Session().Get("msg")
 
-	return response.Resp().String(msg.(string))
+	//fmt.Println(limiter.GlobalLimiters)
+
+	return response.Resp().String("nice")
 }
 
 func Index3(context *context.Context) *response.Response {
