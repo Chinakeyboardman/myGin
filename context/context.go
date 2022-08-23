@@ -79,6 +79,10 @@ func (s *Session) Set(key string, value interface{}) error {
 	session.SessionList[key] = value
 
 	sessionStringNew, err := json.Marshal(session)
+	if err != nil {
+
+		return err
+	}
 
 	//计算新的过期时间
 	e := s.ExpireTime - time.Now().Unix()

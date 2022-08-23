@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
 	//加载全局变量
@@ -16,5 +15,5 @@ func main() {
 
 	routes.Load(r)
 
-	r.Run(":8080")
+	r.Run()
 }
