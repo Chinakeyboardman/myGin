@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/PeterYangs/tools/http"
 	"sync"
+
+	"github.com/PeterYangs/tools/http"
 )
 
 func main() {
